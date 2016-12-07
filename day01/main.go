@@ -6,6 +6,13 @@ import (
 	"strconv"
 	"reflect"
 	"fmt"
+	"io/ioutil"
+	"runtime"
+	"path"
+)
+
+const (
+	INPUT_FILE = "input"
 )
 
 type pos struct {
@@ -22,7 +29,6 @@ func getField(v *dir, field string) int {
     return int(f.Int())
 }
 
-var inp = "R1, L3, R5, R5, R5, L4, R5, R1, R2, L1, L1, R5, R1, L3, L5, L2, R4, L1, R4, R5, L3, R5, L1, R3, L5, R1, L2, R1, L5, L1, R1, R4, R1, L1, L3, R3, R5, L3, R4, L4, R5, L5, L1, L2, R4, R3, R3, L185, R3, R4, L5, L4, R48, R1, R2, L1, R1, L4, L4, R77, R5, L2, R192, R2, R5, L4, L5, L3, R2, L4, R1, L5, R5, R4, R1, R2, L3, R4, R4, L2, L4, L3, R5, R4, L2, L1, L3, R1, R5, R5, R2, L5, L2, L3, L4, R2, R1, L4, L1, R1, R5, R3, R3, R4, L1, L4, R1, L2, R3, L3, L2, L1, L2, L2, L1, L2, R3, R1, L4, R1, L1, L4, R1, L2, L5, R3, L5, L2, L2, L3, R1, L4, R1, R1, R2, L1, L4, L4, R2, R2, R2, R2, R5, R1, L1, L4, L5, R2, R4, L3, L5, R2, R3, L4, L1, R2, R3, R5, L2, L3, R3, R1, R3"
 var visits = make([]pos, 0)
 var startPos pos = pos{x: 0, y: 0}
 var startDirection int = 0
@@ -42,7 +48,13 @@ var turnsMapping = map[int]dir {
 }
 
 func main() {
-	moves := strings.Split(inp, ", ")
+	_, fileName, _, _ := runtime.Caller(0)
+	filePath := path.Join(path.Dir(fileName), INPUT_FILE)
+	inpBuff, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		panic(err)
+	}
+	moves := strings.Split(string(inpBuff), ", ")
 
 	visits = append(visits, startPos)
 	var currDirection int = startDirection

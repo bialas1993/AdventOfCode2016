@@ -3,7 +3,7 @@
 
 I might use various languages to provide solutions... will see how it goes ;).
 
-| Day | Name                                                              | Solved with languages | Status |
+| Day | Name                                                              |      Languages        | Status |
 |:---:|:------------------------------------------------------------------|:---------------------:|:------:|
 | 01  | [No Time for a Taxicab](/tasks/day01.md)                          | [GO](day01/main.go)   |    ✔   |
 | 02  | [Bathroom Security](/tasks/day02.md)                              | [GO](day02/main.go)   |    ✘   |
