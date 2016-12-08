@@ -6,6 +6,7 @@ import (
 	"runtime"
 	"path"
 	"io/ioutil"
+
 	"strconv"
 	"sort"
 )
@@ -14,17 +15,7 @@ const (
 	INPUT_FILE = "input"
 )
 
-var bytes = [8]byte{30, 41, 20, 32, 30, 20, 32, 30}
 var possibleTriangles int = 0
-
-
-func convert( b []byte ) string {
-    s := make([]string,len(b))
-    for i := range b {
-        s[i] = strconv.Itoa(int(b[i]))
-    }
-    return strings.Join(s,",")
-}
 
 func main() {
 	_, fileName, _, _ := runtime.Caller(0)
@@ -34,12 +25,10 @@ func main() {
 		panic(err)
 	}
 
-	trianglesSides := strings.Split(string(inpBuff), convert(bytes[:]))
+	trianglesSides := strings.Split(string(inpBuff), "\n")
 
 	for _, input := range trianglesSides {
-		sidesAsString := strings.Split(strings.Trim(input, " "), " ")
-		println(sidesAsString)
-
+		sidesAsString := strings.Fields(input)
 		sides := make([]int, 3)
 		for i := 0; i < len(sidesAsString); i++ {
 			side, _ := strconv.Atoi(sidesAsString[i])
@@ -47,12 +36,10 @@ func main() {
 		}
 		sort.Ints(sides)
 
-		if (sides[0] + sides[1] >= sides[2]) {
+		if (sides[0] + sides[1] > sides[2]) {
 			possibleTriangles++
 		}
 	}
 
-
 	fmt.Printf("Able to create a triangle: %d", possibleTriangles)
-
 }
