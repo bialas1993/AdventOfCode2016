@@ -53,7 +53,6 @@ func main() {
 		}
 		print(keyboardPos)
 		code.WriteString(string(keyboardPos))
-		//keyboardPos = 5
 	}
 }
 
