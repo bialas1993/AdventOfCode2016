@@ -8,7 +8,7 @@ I might use various languages to provide solutions... will see how it goes ;).
 | 01  | [No Time for a Taxicab](/tasks/day01.md)                          | [GO](day01/main.go)   |    ✔   |
 | 02  | [Bathroom Security](/tasks/day02.md)                              | [GO](day02/main.go)   |    ✔   |
 | 03  | [Squares With Three Sides](/tasks/day03.md)                       | [GO](day03/main.go)   |    ✔   |
-| 04  | [Security Through Obscurity](/tasks/day04.md)                     | [GO](day04/main.go)   |    ✘   |
+| 04  | [Security Through Obscurity](/tasks/day04.md)                     | [GO](day04/main.go)   |    ✔   |
 | 05  | [How About a Nice Game of Chess?](/tasks/day05.md)                | [GO](day05/main.go)   |    ✔   |
 | 06  | [Signals and Noise](/tasks/day06.md)                              | [GO](day06/main.go)   |    ✔   |
 | 07  | [Internet Protocol Version 7](/tasks/day07.md)                    | [GO](day07/main.go)   |    ✘   |
