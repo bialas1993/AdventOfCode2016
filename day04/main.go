@@ -29,7 +29,6 @@ func removeDuplicatesUnordered(elements []string) []string {
     return result
 }
 
-
 func solve(input string) int {
 var re = regexp.MustCompile(`([a-z\-]+)-(\d+)\[([a-z]+)\]`)
 	var idsSum int = 0
@@ -83,6 +82,26 @@ var re = regexp.MustCompile(`([a-z\-]+)-(\d+)\[([a-z]+)\]`)
 	return idsSum
 }
 
+
+func searchedId(input string) int {
+var re = regexp.MustCompile(`([a-z\-]+)-(\d+)\[([a-z]+)\]`)
+	codeInput := strings.Split(input, "\n")
+	for _, line := range codeInput {
+		matchAll := re.FindAllStringSubmatch(line, -1)
+		if len(matchAll) > 0 {
+			match := matchAll[0]
+
+			code := strings.Replace(match[1], "-", " ", -1)
+			shift, _ := strconv.Atoi(match[2])
+
+			if strings.Contains(strings.ToLower(cipher(code, shift)), "north") {
+				return shift
+			}
+		}
+	}
+	return 0
+}
+
 func main() {
 	_, fileName, _, _ := runtime.Caller(0)
 	filePath := path.Join(path.Dir(fileName), INPUT_FILE)
@@ -99,11 +118,28 @@ not-a-real-room-404[oarel]
 totally-real-room-200[decoy]`
 	testExpected := 1514
 
-
 	if testResult := solve(testInput); testResult != testExpected {
 		panic(fmt.Sprintf("Test result is not correct: %s != %s ", testResult, testExpected))
 	}
 
+	fmt.Printf("Task1: %d\n", solve(string(inpBuff)))
+	fmt.Printf("Task2: %d\n", searchedId(string(inpBuff)))
+}
 
-	fmt.Printf("Sum ids: %d", solve(string(inpBuff)))
+func cipher(text string, moved int) string {
+	shift, offset := rune(moved % 26), rune(26)
+	runes := []rune(text)
+
+	for index, char := range runes {
+		if char >= 'a' && char <= 'z'-shift ||
+			char >= 'A' && char <= 'Z'-shift {
+			char = char + shift
+		} else if char > 'z'-shift && char <= 'z' ||
+			char > 'Z'-shift && char <= 'Z' {
+			char = char + shift - offset
+		}
+		runes[index] = char
+	}
+
+	return string(runes)
 }

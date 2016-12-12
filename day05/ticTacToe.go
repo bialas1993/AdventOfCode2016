@@ -83,7 +83,7 @@ func main() {
 	for  {
 		var drawFunctionUses = [9]int {}
 
-		fmt.Print("\033[1;1H\033[2J")
+		fmt.Println("\033[\033[0;0H")
 
 		var y, x, tempY int = 0, 0, 0
 
@@ -133,7 +133,7 @@ func main() {
 }
 
 func drawCross(startDrawX *int, startDrawY *int) {
-	size := 16
+	size := 15
 	var tempX int
 	for j := 0; j < size; j = j + 2 {
 		tempX = *startDrawX
