@@ -54,12 +54,12 @@ func drawBuff(height int, width int) {
 
 func setBoardToBuff() {
 	for y := 1; y < 24; y++ {
-		for x := 1; x < 45; x++ {
+		for x := 1; x < 48; x++ {
 			if  y % 8  == 0  {
 				screenBuff[y][x] = "#"
 			}
 
-			if x % 15 == 0 {
+			if x % 16 == 0 {
 				screenBuff[y][x] = "#"
 			}
 
@@ -84,7 +84,6 @@ func main() {
 		var drawFunctionUses = [9]int {}
 
 		fmt.Print("\033[1;1H\033[2J")
-		//fmt.Println("\033[\033[0;0H")
 
 		var y, x, tempY int = 0, 0, 0
 
@@ -134,7 +133,7 @@ func main() {
 }
 
 func drawCross(startDrawX *int, startDrawY *int) {
-	size := 15
+	size := 16
 	var tempX int
 	for j := 0; j < size; j = j + 2 {
 		tempX = *startDrawX
