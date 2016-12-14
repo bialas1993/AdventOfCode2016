@@ -48,11 +48,10 @@ func calcPixels() int {
 }
 
 func rect(args []string) {
-	print("rect: ")
-	x, _ := strconv.Atoi(args[0][0:1])
-	y, _ := strconv.Atoi(args[0][2:3])
+	split := strings.Split(args[0], "x")
 
-	fmt.Println(x,y)
+	x, _ := strconv.Atoi(split[0])
+	y, _ := strconv.Atoi(split[1])
 
 	for i := 0; i < y; i++ {
 		for j := 0; j < x; j++ {
@@ -62,9 +61,7 @@ func rect(args []string) {
 }
 
 func rotate(args []string) {
-	print("rotate: ")
 	axis := args[1][0:1]
-
 	col, _ := strconv.Atoi(args[1][2:])
 	beforePixel, _ := strconv.Atoi(args[3:4][0])
 
@@ -79,55 +76,87 @@ func rotate(args []string) {
 }
 
 
-func rotateRow(axis string, col int, beforePixel int) {
-	fmt.Print("rotateRow: ")
-	fmt.Println(axis, col, beforePixel)
 
-	if beforePixel >= WIDTH {
-		beforePixel = beforePixel % WIDTH
-	}
-
-	if beforePixel > 0 {
-		move := make([]string, WIDTH - beforePixel)
-
-		for x := 0; x < WIDTH; x++ {
-			if x < WIDTH - beforePixel {
-				move[x] = screen[col][x]
-
-			} else {
-				screen[col][WIDTH - x - 1] = screen[col][x]
-			}
-		}
-
-		for y := range move {
-			screen[col][y + beforePixel] = move[y]
-		}
-	}
-
-}
 
 func rotateCol(axis string, col int, beforePixel int) {
-	fmt.Print("rotateCol: ")
-	fmt.Println(axis, col, beforePixel)
-
-	if beforePixel >= HEIGHT {
-		beforePixel = beforePixel % HEIGHT
+	if beforePixel > HEIGHT {
+		beforePixel =  beforePixel % HEIGHT
 	}
 
 	if beforePixel > 0 {
 		move := make([]string, HEIGHT - beforePixel)
-		for y := range screen {
+
+		for y := 0; y < HEIGHT; y++ {
 			if y < HEIGHT - beforePixel {
 				move[y] = screen[y][col]
 			} else {
-				screen[HEIGHT - y][col] = screen[y][col]
+				screen[y - HEIGHT + beforePixel][col] = screen[y][col]
 			}
 		}
 
-		for y := range move {
+		for y := 0; y < len(move); y++ {
 			screen[y + beforePixel][col] = move[y]
 		}
 	}
+}
+
+func rotateRow(axis string, col int, beforePixel int) {
+	if beforePixel > WIDTH {
+		beforePixel =  beforePixel % WIDTH
+	}
+
+	if beforePixel > 0 {
+		move := make([]string,  WIDTH - beforePixel)
+		for y := 0; y < WIDTH; y++ {
+			if y < WIDTH - beforePixel {
+				move[y] = screen[col][y]
+			} else {
+				screen[col][y - WIDTH + beforePixel] = screen[col][y]
+			}
+		}
+
+		for y := 0; y < len(move); y++ {
+			screen[col][y + beforePixel] = move[y]
+		}
+	}
+}
+
+func main() {
+	initScreen()
+
+	//testInput := "rect 3x2\nrotate column x=1 by 1\nrotate row y=0 by 4\nrotate column x=1 by 1"
+	//testInput = "rect 3x2\nrotate row x=0 by 49"
+	//solve(testInput)
+	//
+
+	//for _, line := range screen {
+	//	fmt.Println(line)
+	//}
+	//return
+
+	//
+	//fmt.Printf("[Task1] Displayed pixels: %d", solve(testInput))
+	//testExpected := "easter"
+	//if testResult := solve(testInput, findMostCommonChar); testResult != testExpected {
+	//	panic(fmt.Sprintf("Test result is not correct: %s != %s ", testResult, testExpected))
+	//}
+
+
+	_, fileName, _, _ := runtime.Caller(0)
+	filePath := path.Join(path.Dir(fileName), INPUT_FILE)
+	inpBuff, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		panic(err)
+	}
+
+
+	solve(string(inpBuff))
+
+	for _, line := range screen {
+		fmt.Println(line)
+	}
+
+	fmt.Printf("[Task1] Displayed pixels: %d", calcPixels())
 }
 
 
@@ -145,35 +174,4 @@ func solve(input string) int {
 	}
 
 	return 0
-}
-
-func main() {
-	initScreen()
-
-	/*testInput := "rect 3x2\nrotate column x=1 by 1\nrotate row y=0 by 4\nrotate column x=1 by 1"
-	testInput = "rect 3x2\nrotate column x=1 by 12\nrotate row x=0 by 2"
-	fmt.Printf("[Task1] Displayed pixels: %d", solve(testInput))*/
-	/*testExpected := "easter"
-	if testResult := solve(testInput, findMostCommonChar); testResult != testExpected {
-		panic(fmt.Sprintf("Test result is not correct: %s != %s ", testResult, testExpected))
-	}*/
-
-
-	_, fileName, _, _ := runtime.Caller(0)
-	filePath := path.Join(path.Dir(fileName), INPUT_FILE)
-	inpBuff, err := ioutil.ReadFile(filePath)
-	if err != nil {
-		panic(err)
-	}
-
-
-	solve(string(inpBuff))
-
-	for _, line := range screen {
-		fmt.Println(line)
-	}
-
-
-
-	fmt.Printf("[Task1] Displayed pixels: %d", calcPixels())
 }

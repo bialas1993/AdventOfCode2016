@@ -12,7 +12,8 @@ I might use various languages to provide solutions... will see how it goes ;).
 | 05  | [How About a Nice Game of Chess?](/tasks/day05.md)                | [GO](day05/main.go)   |    ✔   |
 | 06  | [Signals and Noise](/tasks/day06.md)                              | [GO](day06/main.go)   |    ✔   |
 | 07  | [Internet Protocol Version 7](/tasks/day07.md)                    | [GO](day07/main.go)   |    ✘   |
-| 08  | [Two-Factor Authentication](/tasks/day08.md)                    | [GO](day08/main.go)   |    ✘   |
+| 08  | [Two-Factor Authentication](/tasks/day08.md)                      | [GO](day08/main.go)   |    ✔   |
+| 09  | [Two-Factor Authentication](/tasks/day09.md)                      | [GO](day09/main.go)   |    ✘   |
 
 [day1]: http://adventofcode.com/2016/day/1
 [day2]: http://adventofcode.com/2016/day/2
@@ -22,3 +23,4 @@ I might use various languages to provide solutions... will see how it goes ;).
 [day6]: http://adventofcode.com/2016/day/6
 [day7]: http://adventofcode.com/2016/day/7
 [day8]: http://adventofcode.com/2016/day/8
+[day9]: http://adventofcode.com/2016/day/9
