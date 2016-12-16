@@ -124,31 +124,12 @@ func rotateRow(axis string, col int, beforePixel int) {
 func main() {
 	initScreen()
 
-	//testInput := "rect 3x2\nrotate column x=1 by 1\nrotate row y=0 by 4\nrotate column x=1 by 1"
-	//testInput = "rect 3x2\nrotate row x=0 by 49"
-	//solve(testInput)
-	//
-
-	//for _, line := range screen {
-	//	fmt.Println(line)
-	//}
-	//return
-
-	//
-	//fmt.Printf("[Task1] Displayed pixels: %d", solve(testInput))
-	//testExpected := "easter"
-	//if testResult := solve(testInput, findMostCommonChar); testResult != testExpected {
-	//	panic(fmt.Sprintf("Test result is not correct: %s != %s ", testResult, testExpected))
-	//}
-
-
 	_, fileName, _, _ := runtime.Caller(0)
 	filePath := path.Join(path.Dir(fileName), INPUT_FILE)
 	inpBuff, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		panic(err)
 	}
-
 
 	solve(string(inpBuff))
 
